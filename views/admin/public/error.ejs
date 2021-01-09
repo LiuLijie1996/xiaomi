@@ -21,7 +21,7 @@
         ms--;
         $("#ms").html(ms);
 
-        if (ms <= 0) {
+        if (ms < 1) {
             clearInterval(set);
 
             window.location.href = "<%=href%>";

@@ -1,6 +1,6 @@
 import { Module, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
 
-import { Config } from "../config/Config";
+import { Config } from '../config/Config';
 
 // 控制器
 import { ManagerController } from './manager/manager.controller';
@@ -9,11 +9,12 @@ import { LoginController } from './login/login.controller';
 
 // 服务
 import { ToolsService } from '../public/service/tools/tools.service';
-import { AdminService } from "../public/service/admin/admin.service";
+import { AdminService } from '../public/service/admin/admin.service';
+import { RoleService } from '../public/service/role/role.service';
 
 // 中间件
-import { AdminMiddleware } from "../public/middleware/admin.middleware";
-import { InitMiddleware } from "../public/middleware/init.middleware";
+import { AdminMiddleware } from '../public/middleware/admin.middleware';
+import { InitMiddleware } from '../public/middleware/init.middleware';
 
 // 引入 MongooseModule 用来注册数据模型的
 import { MongooseModule } from '@nestjs/mongoose';
@@ -27,29 +28,33 @@ import { RoleSchema } from 'src/public/schema/role.schema';
     MongooseModule.forFeature([
       // 注册 admin 数据模型
       {
-        name: "Admin",
+        name: 'Admin',
         schema: AdminSchema,
-        collection: "admin",
+        collection: 'admin',
       },
       // 注册 role 数据模型
       {
-        name: "Role",
+        name: 'Role',
         schema: RoleSchema,
-        collection: "role",
+        collection: 'role',
       },
     ]),
   ],
-  controllers: [ManagerController, MainController, LoginController, RoleController],
-  providers: [ToolsService, AdminService],
+  controllers: [
+    ManagerController,
+    MainController,
+    LoginController,
+    RoleController,
+  ],
+  providers: [ToolsService, AdminService, RoleService],
 })
 export class AdminModule {
   configure(consumer: MiddlewareConsumer) {
-
     // 配置中间件
     consumer
       .apply(InitMiddleware)
       .forRoutes(`/${Config.adminPath}`)
-      .apply(AdminMiddleware)// 注册中间件
-      .forRoutes(`/${Config.adminPath}/*`)// 访问所有路由使用中间件
+      .apply(AdminMiddleware) // 注册中间件
+      .forRoutes(`/${Config.adminPath}/*`); // 访问所有路由使用中间件
   }
 }
