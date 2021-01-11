@@ -16,8 +16,9 @@ export class AdminMiddleware implements NestMiddleware {
       res.locals.userinfo = userinfo;
       next();
     } else {
-      let href = req._parsedOriginalUrl.href;
-      if (href === `/${Config.adminPath}/login` || href === `/${Config.adminPath}/login/captcha` || href === `/${Config.adminPath}/login/doLogin`) {
+      let pathname = req._parsedOriginalUrl.pathname;
+      
+      if (pathname === `/${Config.adminPath}/login` || pathname === `/${Config.adminPath}/login/captcha` || pathname === `/${Config.adminPath}/login/doLogin`) {
         next();
       } else {
         // 重定向到登录页面

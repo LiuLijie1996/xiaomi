@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export class Helper {
     /**
      * 字符串截取
@@ -12,4 +14,11 @@ export class Helper {
             return str.substring(start);
         }
     }
+
+    /**
+     * 时间戳格式化
+    */
+   static moment(time:number){
+    return moment(time).format('YYYY-MM-DD HH:mm');
+   }
 }

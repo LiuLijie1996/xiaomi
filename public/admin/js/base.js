@@ -13,6 +13,9 @@ var page = {
 
 		// 左侧导航的点击效果
 		this.slideToggle();
+
+		// 删除
+		this.delete();
 	},
 
 	/**
@@ -30,7 +33,18 @@ var page = {
 			//		$(this).toggleClass('active');
 			$(this).siblings('ul').slideToggle();
 		})
-	}
+	},
+
+	/**
+	 * 删除
+	*/
+	delete: function () {
+		$('.delete').click(function () {
+			var flag = confirm("你确定删除吗？");
+			console.log(flag);
+			return flag;
+		})
+	},
 };
 
 window.onresize = page.resizeIframe;

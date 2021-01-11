@@ -18,7 +18,7 @@ async function bootstrap() {
 
     // 配置cookie
     cookie: {
-      maxAge: 10 * 60 * 1000,//过期时间
+      maxAge: 24 * 60 * 60 * 1000,//过期时间
       httpOnly: true,//只允许后端访问
     },
   }));

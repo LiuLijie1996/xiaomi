@@ -1,6 +1,7 @@
 
 // 管理员信息数据类型
 export interface AdminInfo {
+    _id?: String;
     username?: String;
     password?: String;
     phone?: String;

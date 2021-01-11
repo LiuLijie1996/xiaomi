@@ -11,7 +11,7 @@ export class RoleService {
   /**
    * 查找数据
    */
-  async find(json: RoleDataType) {
+  async find(json: RoleDataType = {}) {
     let result = await this.roleModel.find(json);
     return result;
   }
@@ -29,6 +29,14 @@ export class RoleService {
    */
   async update(json1: RoleDataType, json2: RoleDataType) {
     let result = await this.roleModel.updateOne(json1, json2);
+    return result;
+  }
+
+  /**
+   * 删除数据
+   */
+  async delete(json: RoleDataType) {
+    let result = await this.roleModel.deleteOne(json);
     return result;
   }
 }

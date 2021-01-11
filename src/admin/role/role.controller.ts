@@ -16,15 +16,21 @@ export class RoleController {
   constructor(
     private roleService: RoleService,
     private toolsService: ToolsService,
-  ) {}
+  ) { }
 
   /**
    * 角色列表
    */
   @Get()
   @Render('admin/role/index')
-  async index() {
-    let result = await this.roleService.find({});
+  async index(@Query() query) {
+    let result: [];
+    if (query.title === '') {
+      result = await this.roleService.find({});
+    } else {
+      result = await this.roleService.find(query);
+    }
+
     return {
       roleList: result,
     };
@@ -78,6 +84,20 @@ export class RoleController {
     this.toolsService.succeed({
       res: res,
       msg: '角色修改成功',
+      href: `/${Config.adminPath}/role`,
+    });
+  }
+
+  /**
+   * 删除角色
+   */
+  @Get('delete')
+  async delete(@Response() res, @Query() query) {
+    await this.roleService.delete({ _id: query.id });
+
+    this.toolsService.succeed({
+      res: res,
+      msg: '角色删除成功',
       href: `/${Config.adminPath}/role`,
     });
   }
