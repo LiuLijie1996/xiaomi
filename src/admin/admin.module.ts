@@ -26,6 +26,7 @@ import { RoleSchema } from 'src/public/schema/role.schema';
 import { AccessSchema } from "src/public/schema/access";
 import { AccessController } from './controller/access/access.controller';
 import { RoleAccessSchema } from 'src/public/schema/role_access.schema';
+import { RoleAccessService } from 'src/public/service/role-access/role-access.service';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { RoleAccessSchema } from 'src/public/schema/role_access.schema';
     AdminService,
     RoleService,
     AccessService,
+    RoleAccessService,
   ],
 })
 export class AdminModule {

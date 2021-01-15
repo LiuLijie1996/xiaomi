@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-10">
-                <form action="/<%=config.adminPath%>/role/doAuth" method="POST">
+                <form action="/<%=config.adminPath%>/role/doAuth?id=<%=role_id%>" method="POST">
                     <table class="table table-bordered">
                         <%for(let i=0; i<list.length; i++){%>
                             <tr>
@@ -20,7 +20,7 @@
                                         <label>
                                             <input type="checkbox" class="action_cbo" value="<%=list[i].items[j]._id%>" name="access_node[]">
                                             &nbsp;&nbsp;<%=list[i].items[j].action_name%>
-                                        </label>
+                                        </label>&nbsp;&nbsp;
                                     <%}%>
                                 </td>
                             </tr>

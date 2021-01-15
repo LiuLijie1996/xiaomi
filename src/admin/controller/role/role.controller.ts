@@ -11,6 +11,7 @@ import { AccessService } from 'src/public/service/access/access.service';
 import { Config } from '../../../public/config/Config';
 import { RoleService } from '../../../public/service/role/role.service';
 import { ToolsService } from '../../../public/service/tools/tools.service';
+import { RoleAccessService } from "../../../public/service/role-access/role-access.service";
 
 @Controller(Config.adminPath + '/role')
 export class RoleController {
@@ -18,6 +19,7 @@ export class RoleController {
     private roleService: RoleService,
     private toolsService: ToolsService,
     private accessService: AccessService,
+    private roleAccessService: RoleAccessService,
   ) { }
 
   /**
@@ -130,6 +132,7 @@ export class RoleController {
 
     return {
       list: result,
+      role_id: query.id,
     };
   }
 
@@ -137,8 +140,31 @@ export class RoleController {
    * 存储授权
    */
   @Post('doAuth')
-  async doAuth(@Body() body) {
-    console.log(body);
-    
+  async doAuth(@Body() body, @Query() query, @Response() res) {
+    console.log(body, query);
+    let role_id = query.id;
+    let access_node: string[] = body.access_node;
+
+    // 删除所有
+    await this.roleAccessService.deleteMany({
+      role_id: role_id,
+    });
+
+    if (access_node) {
+      for (let index = 0; index < access_node.length; index++) {
+        const access_id = access_node[index];
+        await this.roleAccessService.add({
+          role_id: role_id,
+          access_id: access_id,
+        });
+      }
+    }
+
+
+    this.toolsService.succeed({
+      res,
+      msg:"操作成功",
+      href: "/" + Config.adminPath + "/role",
+    });
   }
 }
