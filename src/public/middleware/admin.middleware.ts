@@ -1,5 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
-import { Config } from "../../config/Config";
+import { Config } from "../config/Config";
 
 /**
  * 后台管理系统使用的中间件

@@ -1,0 +1,41 @@
+<%- include ('../public/page_header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-10">
+                <form action="/<%=config.adminPath%>/role/doAuth" method="POST">
+                    <table class="table table-bordered">
+                        <%for(let i=0; i<list.length; i++){%>
+                            <tr>
+                                <td align="right" style="background: #D8E2FA; padding-right: 10px; width: 150px;">
+                                    <label>
+                                        <input type="checkbox" class="module_cbo" value="<%=list[i]._id%>" name="access_node[]">&nbsp;&nbsp;
+                                        <%=list[i].module_name%>
+                                    </label>
+                                </td>
+                                <td>
+                                    &nbsp;&nbsp;
+    
+                                    <%for(let j=0; j<list[i].items.length; j++){%>
+                                        <label>
+                                            <input type="checkbox" class="action_cbo" value="<%=list[i].items[j]._id%>" name="access_node[]">
+                                            &nbsp;&nbsp;<%=list[i].items[j].action_name%>
+                                        </label>
+                                    <%}%>
+                                </td>
+                            </tr>
+                        <%}%>
+                    </table>
+
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let obj = "<%=JSON.stringify(list)%>";
+    </script>
+    </body>
+
+    </html>

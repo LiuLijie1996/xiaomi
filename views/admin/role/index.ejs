@@ -45,6 +45,7 @@
                                     <%=helper.moment(roleList[i].add_time)%>
                                 </td>
                                 <td class="text-center">
+                                    <a target="rightView" href="/<%=config.adminPath%>/role/auth?id=<%=roleList[i]._id%>">授权</a>
                                     <a target="rightView" href="/<%=config.adminPath%>/role/update?id=<%=roleList[i]._id%>">修改</a>
                                     <a class="delete" href="/<%=config.adminPath%>/role/delete?id=<%=roleList[i]._id%>">删除</a>
                                 </td>

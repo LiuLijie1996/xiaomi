@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
-import { Config } from "../../config/Config";
-import { Helper } from "../../extend/helper";
+import { Config } from "../config/Config";
+import { Helper } from "../extend/helper";
 
 @Injectable()
 export class InitMiddleware implements NestMiddleware {

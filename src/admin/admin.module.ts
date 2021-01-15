@@ -1,16 +1,17 @@
 import { Module, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
 
-import { Config } from '../config/Config';
+import { Config } from '../public/config/Config';
 
 // 控制器
-import { ManagerController } from './manager/manager.controller';
-import { MainController } from './main/main.controller';
-import { LoginController } from './login/login.controller';
+import { ManagerController } from './controller/manager/manager.controller';
+import { MainController } from './controller/main/main.controller';
+import { LoginController } from './controller/login/login.controller';
 
 // 服务
 import { ToolsService } from '../public/service/tools/tools.service';
 import { AdminService } from '../public/service/admin/admin.service';
 import { RoleService } from '../public/service/role/role.service';
+import { AccessService } from "../public/service/access/access.service";
 
 // 中间件
 import { AdminMiddleware } from '../public/middleware/admin.middleware';
@@ -20,8 +21,11 @@ import { InitMiddleware } from '../public/middleware/init.middleware';
 import { MongooseModule } from '@nestjs/mongoose';
 // 数据模型
 import { AdminSchema } from 'src/public/schema/admin.schema';
-import { RoleController } from './role/role.controller';
+import { RoleController } from './controller/role/role.controller';
 import { RoleSchema } from 'src/public/schema/role.schema';
+import { AccessSchema } from "src/public/schema/access";
+import { AccessController } from './controller/access/access.controller';
+import { RoleAccessSchema } from 'src/public/schema/role_access.schema';
 
 @Module({
   imports: [
@@ -38,6 +42,18 @@ import { RoleSchema } from 'src/public/schema/role.schema';
         schema: RoleSchema,
         collection: 'role',
       },
+      // 注册 access 数据模型
+      {
+        name: 'Access',
+        schema: AccessSchema,
+        collection: 'access',
+      },
+      // 注册 role_access 数据模型
+      {
+        name: 'RoleAccess',
+        schema: RoleAccessSchema,
+        collection: 'role_access',
+      },
     ]),
   ],
   controllers: [
@@ -45,8 +61,14 @@ import { RoleSchema } from 'src/public/schema/role.schema';
     MainController,
     LoginController,
     RoleController,
+    AccessController,
   ],
-  providers: [ToolsService, AdminService, RoleService],
+  providers: [
+    ToolsService,
+    AdminService,
+    RoleService,
+    AccessService,
+  ],
 })
 export class AdminModule {
   configure(consumer: MiddlewareConsumer) {

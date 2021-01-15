@@ -7,15 +7,17 @@ import {
   Render,
   Response,
 } from '@nestjs/common';
-import { Config } from '../../config/Config';
-import { RoleService } from '../../public/service/role/role.service';
-import { ToolsService } from '../../public/service/tools/tools.service';
+import { AccessService } from 'src/public/service/access/access.service';
+import { Config } from '../../../public/config/Config';
+import { RoleService } from '../../../public/service/role/role.service';
+import { ToolsService } from '../../../public/service/tools/tools.service';
 
 @Controller(Config.adminPath + '/role')
 export class RoleController {
   constructor(
     private roleService: RoleService,
     private toolsService: ToolsService,
+    private accessService: AccessService,
   ) { }
 
   /**
@@ -100,5 +102,43 @@ export class RoleController {
       msg: '角色删除成功',
       href: `/${Config.adminPath}/role`,
     });
+  }
+
+  /**
+   * 授权页面
+   */
+  @Get('auth')
+  @Render("admin/role/auth")
+  async auth(@Query() query) {
+    // 获取权限列表
+    let result = await this.accessService.aggregate().aggregate([
+      {
+        $lookup: {
+          localField: "_id",//当前表的字段
+
+          from: 'access',//需要关联的表的名称
+          foreignField: "module_id",//关联表的字段
+          as: "items",
+        }
+      },
+      {
+        $match: {
+          module_id: '0',
+        }
+      }
+    ]);
+
+    return {
+      list: result,
+    };
+  }
+
+  /**
+   * 存储授权
+   */
+  @Post('doAuth')
+  async doAuth(@Body() body) {
+    console.log(body);
+    
   }
 }

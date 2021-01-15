@@ -8,9 +8,9 @@ import {
   Request,
   Response,
 } from '@nestjs/common';
-import { ToolsService } from '../../public/service/tools/tools.service';
-import { AdminService } from '../../public/service/admin/admin.service';
-import { Config } from '../../config/Config';
+import { ToolsService } from '../../../public/service/tools/tools.service';
+import { AdminService } from '../../../public/service/admin/admin.service';
+import { Config } from '../../../public/config/Config';
 
 @Controller(`${Config.adminPath}/login`)
 export class LoginController {

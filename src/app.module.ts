@@ -4,7 +4,7 @@ import { AdminModule } from './admin/admin.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { InitMiddleware } from './public/middleware/init.middleware';
 import { AdminMiddleware } from './public/middleware/admin.middleware';
-import { Config } from './config/Config';
+import { Config } from './public/config/Config';
 
 @Module({
   imports: [

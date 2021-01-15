@@ -1,5 +1,5 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import {Config } from "../../config/Config";
+import {Config } from "../../../public/config/Config";
 
 
 @Controller(`${Config.adminPath}`)

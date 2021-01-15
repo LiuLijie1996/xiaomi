@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { RoleSchema } from '../../schema/role.schema';
 import { RoleDataType } from '../../interface/role.interface';
 
 @Injectable()

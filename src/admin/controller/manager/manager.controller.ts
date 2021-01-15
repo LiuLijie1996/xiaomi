@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, Query, Render, Response } from '@nestjs/common';
-import { Config } from "../../config/Config";
-import { RoleService } from "../../public/service/role/role.service";
-import { ToolsService } from "../../public/service/tools/tools.service";
-import { AdminService } from "../../public/service/admin/admin.service";
+import { Config } from "../../../public/config/Config";
+import { RoleService } from "../../../public/service/role/role.service";
+import { ToolsService } from "../../../public/service/tools/tools.service";
+import { AdminService } from "../../../public/service/admin/admin.service";
 
 /**
  * 管理员
