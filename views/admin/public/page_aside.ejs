@@ -1,29 +1,21 @@
 <ul class="aside">
-         		
-    <li>
-        <h4>管理员管理</h4>
-        
-        <ul>
-            <li  class="list-group-item"> <a target="rightView" href="/<%=config.adminPath%>/manager/"> 管理员列表</a></li>
-            
-            <li class="list-group-item"> <a target="rightView" href="/<%=config.adminPath%>/manager/add">增加管理员</a></li>
-        </ul>
-    </li>
-    <li>
-        <h4>角色管理</h4>
-        <ul>
-            <li  class="list-group-item"> <a target="rightView" href="/<%=config.adminPath%>/role">角色列表</a></li>
-            
-            <li class="list-group-item"> <a target="rightView" href="/<%=config.adminPath%>/role/add" >增加角色</a></li>
-        </ul>
-    </li>
-    <li>
-        <h4>权限管理</h4>
-        
-        <ul>
-            <li  class="list-group-item"> <a target="rightView" href="/<%=config.adminPath%>/access"> 权限列表</a></li>
-            
-            <li class="list-group-item"> <a target="rightView" href="/<%=config.adminPath%>/access/add">增加权限</a></li>
-        </ul>
-    </li>
+    <%for(let i=0; i<list.length; i++){%>
+        <%if( userinfo.is_super == 1 || list[i].checked ){%>
+            <li>
+                <h4><%=list[i].module_name%></h4>
+                
+                <ul>
+                    <%for(let j=0; j<list[i].items.length; j++){%>
+                        <%if( (userinfo.is_super == 1 && list[i].items[j].type == 2) || (list[i].checked && list[i].items[j].type == 2) ){%>
+                            <li  class="list-group-item">
+                                <a target="rightView" href="/<%=config.adminPath%>/<%=list[i].items[j].url%>">
+                                    <%=list[i].items[j].module_name%>
+                                </a>
+                            </li>
+                        <%}%>
+                    <%}%>
+                </ul>
+            </li>
+        <%}%>
+    <%}%>
 </ul>

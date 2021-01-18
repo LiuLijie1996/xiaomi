@@ -130,6 +130,37 @@ export class RoleController {
       }
     ]);
 
+    // 查询当前角色拥有的权限
+    let resultRoleAccess = await this.roleAccessService.find({
+      role_id: query.id,
+    });
+
+    // 遍历出当前角色拥有的权限id
+    let roleAccessList = [];
+    for (let index = 0; index < resultRoleAccess.length; index++) {
+      const access_id = resultRoleAccess[index].access_id.toString();
+      roleAccessList.push(access_id);
+    }
+
+    // 遍历第一层权限列表
+    for (let index = 0; index < result.length; index++) {
+      let access_id = result[index]._id.toString();
+
+      // 判断第一层权限id 是否在当前角色拥有的权限id中
+      if (roleAccessList.includes(access_id)) {
+        result[index].checked = true;
+      }
+
+
+      // 判断子权限是否选中了
+      for (let j = 0; j < result[index].items.length; j++) {
+        let item_access_id = result[index].items[j]._id.toString();
+        if (roleAccessList.includes(item_access_id)) {
+          result[index].items[j].checked = true;
+        }
+      }
+    }
+
     return {
       list: result,
       role_id: query.id,
@@ -141,15 +172,15 @@ export class RoleController {
    */
   @Post('doAuth')
   async doAuth(@Body() body, @Query() query, @Response() res) {
-    console.log(body, query);
     let role_id = query.id;
     let access_node: string[] = body.access_node;
 
-    // 删除所有
+    // 删除所有存储的权限
     await this.roleAccessService.deleteMany({
       role_id: role_id,
     });
 
+    // 存储这次选择的权限
     if (access_node) {
       for (let index = 0; index < access_node.length; index++) {
         const access_id = access_node[index];
@@ -160,10 +191,9 @@ export class RoleController {
       }
     }
 
-
     this.toolsService.succeed({
       res,
-      msg:"操作成功",
+      msg: "操作成功",
       href: "/" + Config.adminPath + "/role",
     });
   }

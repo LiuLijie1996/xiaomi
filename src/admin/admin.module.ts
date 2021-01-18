@@ -71,6 +71,7 @@ import { RoleAccessService } from 'src/public/service/role-access/role-access.se
     AccessService,
     RoleAccessService,
   ],
+  exports: [RoleAccessService, AccessService, AdminService],
 })
 export class AdminModule {
   configure(consumer: MiddlewareConsumer) {

@@ -3,6 +3,9 @@ import * as mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const d = new Date();
 
+/**
+ * 权限表
+*/
 export const AccessSchema = new Schema({
     /**
      * 模块名称

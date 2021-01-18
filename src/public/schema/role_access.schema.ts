@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 /**
- * 角色数据表
+ * 角色权限数据表
 */
 export const RoleAccessSchema = new mongoose.Schema({
     // 角色id

@@ -28,6 +28,9 @@ export const AdminSchema = new mongoose.Schema({
         default: new Date().getTime(),
     },
 
-    // 超级管理员
-    is_super: { type: Number },
+    // 1超级管理员  2普通管理员
+    is_super: { 
+        type: Number,
+        default: 2,
+     },
 });
