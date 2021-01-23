@@ -27,6 +27,9 @@ import { AccessSchema } from "src/public/schema/access";
 import { AccessController } from './controller/access/access.controller';
 import { RoleAccessSchema } from 'src/public/schema/role_access.schema';
 import { RoleAccessService } from 'src/public/service/role-access/role-access.service';
+import { FocusController } from './controller/focus/focus.controller';
+import { FocusSchema } from 'src/public/schema/focus';
+import { FocusService } from 'src/public/service/focus/focus.service';
 
 @Module({
   imports: [
@@ -55,6 +58,12 @@ import { RoleAccessService } from 'src/public/service/role-access/role-access.se
         schema: RoleAccessSchema,
         collection: 'role_access',
       },
+      // 注册 focus 数据模型
+      {
+        name: 'Focus',
+        schema: FocusSchema,
+        collection: 'focus',
+      },
     ]),
   ],
   controllers: [
@@ -63,6 +72,7 @@ import { RoleAccessService } from 'src/public/service/role-access/role-access.se
     LoginController,
     RoleController,
     AccessController,
+    FocusController,
   ],
   providers: [
     ToolsService,
@@ -70,8 +80,11 @@ import { RoleAccessService } from 'src/public/service/role-access/role-access.se
     RoleService,
     AccessService,
     RoleAccessService,
+    FocusService,
   ],
-  exports: [RoleAccessService, AccessService, AdminService],
+  exports: [
+    RoleAccessService, AccessService, AdminService,
+  ],
 })
 export class AdminModule {
   configure(consumer: MiddlewareConsumer) {

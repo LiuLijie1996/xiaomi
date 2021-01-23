@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import * as svgCaptcha from "svg-captcha";
 import * as md5 from "md5";
+import * as moment from "moment";
+import { resolve, extname } from 'path';
+import { createWriteStream, mkdirSync, existsSync } from 'fs';
 
 /**
  * 工具集
@@ -48,5 +51,44 @@ export class ToolsService {
             "msg": msg,
             "href": href,
         });
+    }
+
+    /**
+     * 保存文件
+    */
+    // 保存文件
+    saveFile(file) {
+        try {
+            let getTime = new Date().getTime();
+            // 设置目录名
+            let dirName = moment(getTime).format("YYYYMMDD");
+            // 设置文件名
+            let fileName = getTime + extname(file.originalname);
+
+            // 拼接出保存文件的路径
+            let savePath = resolve(__dirname, "../../../../public/upload/" + dirName);
+
+            // 如果目录不存在则创建一个目录
+            if (!existsSync(savePath)) {
+                // 创建目录
+                mkdirSync(savePath);
+            }
+
+            // 创建写入流
+            let createWrite = createWriteStream(savePath + '/' + fileName);
+            // 写入文件
+            createWrite.write(file.buffer);
+
+            return {
+                code: 200,
+                msg: "上传成功",
+                fileUrl: '/upload/' + dirName + '/' + fileName,
+            };
+        } catch (error) {
+            return {
+                code: 0,
+                msg: error,
+            };
+        }
     }
 }

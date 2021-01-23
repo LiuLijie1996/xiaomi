@@ -1,0 +1,56 @@
+<%- include ('../public/page_header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 列表展示 -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="th">
+                            <th>分类</th>
+                            <th>名称</th>
+                            <th>跳转地址</th>
+                            <th>图片预览</th>
+                            <th>排序</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0; i<focusList.length; i++){%>
+                            <tr>
+                                <td>
+                                    <%if(focusList[i].type==1){%>
+                                        网站
+                                        <%}else if(focusList[i].type==2){%>
+                                            APP
+                                            <%}else{%>
+                                                小程序
+                                                <%}%>
+                                </td>
+                                <td>
+                                    <%=focusList[i].title%>
+                                </td>
+                                <td>
+                                    <%=focusList[i].url%>
+                                </td>
+                                <td>
+                                    <img src="<%=focusList[i].imgUrl%>" alt="" width="150">
+                                </td>
+                                <td>
+                                    <%=focusList[i].sort%>
+                                </td>
+                                <td>
+                                    <a href="#">修改</a>
+                                    <a href="#">删除</a>
+                                </td>
+                            </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    </html>

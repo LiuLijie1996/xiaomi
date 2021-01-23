@@ -17,6 +17,7 @@ import { Config } from './public/config/Config';
     // admin 模块
     AdminModule,
   ],
+  providers: [],
   // controllers: [],
   // providers: [],
 })
