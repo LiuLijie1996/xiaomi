@@ -19,4 +19,18 @@ export class FocusService {
     async find(json: FocusInterface = {}) {
         return this.focusModel.find(json);
     }
+
+    /**
+     * 修改轮播
+    */
+    async update(json1: FocusInterface = {},json2: FocusInterface = {}) {
+        return this.focusModel.updateOne(json1, json2);
+    }
+
+    /**
+     * 删除轮播
+    */
+    async delete(json: FocusInterface = {}) {
+        return this.focusModel.deleteOne(json);
+    }
 }
