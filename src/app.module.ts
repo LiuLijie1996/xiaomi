@@ -17,9 +17,8 @@ import { Config } from './public/config/Config';
     // admin 模块
     AdminModule,
   ],
+  controllers: [],
   providers: [],
-  // controllers: [],
-  // providers: [],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

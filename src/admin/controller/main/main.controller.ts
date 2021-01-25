@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Render, Request, Response } from '@nestjs/common';
 import { AccessService } from 'src/public/service/access/access.service';
 import { FocusService } from 'src/public/service/focus/focus.service';
+import { GoodsTypeService } from 'src/public/service/goods-type/goods-type.service';
 import { RoleAccessService } from 'src/public/service/role-access/role-access.service';
 import { ToolsService } from 'src/public/service/tools/tools.service';
 import { Config } from "../../../public/config/Config";
@@ -13,6 +14,7 @@ export class MainController {
         private roleAccessService: RoleAccessService,
         private focusService: FocusService,
         private toolsService: ToolsService,
+        private goodsTypeService: GoodsTypeService,
     ) { }
 
     /**

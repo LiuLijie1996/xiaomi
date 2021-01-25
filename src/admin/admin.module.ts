@@ -30,6 +30,10 @@ import { RoleAccessService } from 'src/public/service/role-access/role-access.se
 import { FocusController } from './controller/focus/focus.controller';
 import { FocusSchema } from 'src/public/schema/focus';
 import { FocusService } from 'src/public/service/focus/focus.service';
+import { GoodsController } from './controller/goods/goods.controller';
+import { GoodsTypeController } from './controller/goods-type/goods-type.controller';
+import { GoodsTypeSchema } from 'src/public/schema/goodsType.schema';
+import { GoodsTypeService } from 'src/public/service/goods-type/goods-type.service';
 
 @Module({
   imports: [
@@ -64,6 +68,13 @@ import { FocusService } from 'src/public/service/focus/focus.service';
         schema: FocusSchema,
         collection: 'focus',
       },
+      // 注册 goods_type 数据模型
+      {
+        name: 'GoodsType',
+        schema: GoodsTypeSchema,
+        collection: 'goods_type',
+      },
+
     ]),
   ],
   controllers: [
@@ -73,6 +84,8 @@ import { FocusService } from 'src/public/service/focus/focus.service';
     RoleController,
     AccessController,
     FocusController,
+    GoodsController,
+    GoodsTypeController,
   ],
   providers: [
     ToolsService,
@@ -81,6 +94,7 @@ import { FocusService } from 'src/public/service/focus/focus.service';
     AccessService,
     RoleAccessService,
     FocusService,
+    GoodsTypeService,
   ],
   exports: [
     RoleAccessService, AccessService, AdminService,
