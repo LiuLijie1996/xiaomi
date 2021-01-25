@@ -50,4 +50,12 @@ export const FocusSchema = new Schema({
         type: Number,
         default: Date.now(),
     },
+
+    /**
+     * 状态
+    */
+    status: {
+        type: Number,
+        default: 1,
+    },
 });

@@ -12,6 +12,7 @@
                             <th>跳转地址</th>
                             <th>图片预览</th>
                             <th>排序</th>
+                            <th>状态</th>
                             <th class="text-center">操作</th>
                         </tr>
                     </thead>
@@ -37,14 +38,41 @@
                                     <img src="<%=focusList[i].imgUrl%>" alt="" width="150">
                                 </td>
                                 <td>
-                                    <%=focusList[i].sort%>
+                                    <span onclick="page.updateSort({
+                                        ele: this, 
+                                        model: 'focusService', 
+                                        id: '<%=focusList[i]._id%>',
+                                    })">
+                                        <%=focusList[i].sort%>
+                                    </span>
                                 </td>
                                 <td>
-                                    <a target="rightView" href="/<%=config.adminPath%>/focus/edit?id=<%=focusList[i]._id%>">修改</a>
-                                    <a class="delete" href="/<%=config.adminPath%>/focus/delete?id=<%=focusList[i]._id%>">删除</a>
+                                    <%if(focusList[i].status===1){%>
+                                        <img src="/admin/images/yes.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'focusService', 
+                                            id: '<%=focusList[i]._id%>',
+                                            key: 'status',
+                                            value: 2,
+                                        })">
+                                        <%}else{%>
+                                            <img src="/admin/images/no.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'focusService', 
+                                            id: '<%=focusList[i]._id%>',
+                                            key: 'status',
+                                            value: 1,
+                                        })">
+                                            <%}%>
+                                </td>
+                                <td>
+                                    <a target="rightView"
+                                        href="/<%=config.adminPath%>/focus/edit?id=<%=focusList[i]._id%>">修改</a>
+                                    <a class="delete"
+                                        href="/<%=config.adminPath%>/focus/delete?id=<%=focusList[i]._id%>">删除</a>
                                 </td>
                             </tr>
-                        <%}%>
+                            <%}%>
                     </tbody>
                 </table>
             </div>

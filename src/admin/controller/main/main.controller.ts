@@ -1,6 +1,8 @@
-import { Controller, Get, Render, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Render, Request, Response } from '@nestjs/common';
 import { AccessService } from 'src/public/service/access/access.service';
+import { FocusService } from 'src/public/service/focus/focus.service';
 import { RoleAccessService } from 'src/public/service/role-access/role-access.service';
+import { ToolsService } from 'src/public/service/tools/tools.service';
 import { Config } from "../../../public/config/Config";
 
 
@@ -9,6 +11,8 @@ export class MainController {
     constructor(
         private accessService: AccessService,
         private roleAccessService: RoleAccessService,
+        private focusService: FocusService,
+        private toolsService: ToolsService,
     ) { }
 
     /**
@@ -81,5 +85,32 @@ export class MainController {
     @Render("admin/main/welcome") //模板文件
     index2() {
         return {};
+    }
+
+    /**
+     * 修改字段值
+    */
+    @Post('updateKey')
+    async updateKey(@Body() body) {
+        let model = body.model;
+
+        try {
+            await this[model].update({ _id: body.id }, {
+                [body.key]: body.value,
+            });
+
+            return {
+                code: 200,
+                msg: "操作成功"
+            };
+
+        } catch (error) {
+            console.log(error);
+
+            return {
+                code: 0,
+                msg: "操作失败"
+            };
+        }
     }
 }
