@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { GoodsTypeInterface } from 'src/public/interface/goodsTypeInterface';
+import { GoodsTypeInterface } from 'src/public/interface/goods-type.interface';
 
 @Injectable()
 export class GoodsTypeService {

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as svgCaptcha from "svg-captcha";
 import * as md5 from "md5";
 import * as moment from "moment";
+import * as mongoose from "mongoose";
 import { resolve, extname } from 'path';
 import { createWriteStream, mkdirSync, existsSync } from 'fs';
 
@@ -91,4 +92,11 @@ export class ToolsService {
             };
         }
     }
+
+    /**
+     * 转换id
+    */
+   objectId(id){
+       return mongoose.Types.ObjectId(id);
+   }
 }

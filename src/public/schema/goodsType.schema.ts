@@ -27,7 +27,7 @@ export const GoodsTypeSchema = new Schema({
      * 添加时间
      */
     add_time: {
-        type: Date,
+        type: Number,
         default: Date.now(),
     },
 
