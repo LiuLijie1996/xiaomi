@@ -1,0 +1,112 @@
+<%- include ('../public/page_header.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 列表展示 -->
+            <div class="table-responsive">
+                <a target="rightView" href="/<%=config.adminPath%>/goodsCate/add">增加商品类型</a>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="th">
+                            <th>分类名称</th>
+                            <th>分类图片</th>
+                            <th>描述</th>
+                            <th>增加时间</th>
+                            <th>状态</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0; i<cateList.length; i++){%>
+                            <tr>
+                                <td>
+                                    <%=cateList[i].title%>
+                                </td>
+                                <td>
+                                    <img src="<%=cateList[i].cate_img%>" alt="" width="200">
+                                </td>
+                                <td>
+                                    <%=cateList[i].description%>
+                                </td>
+                                <td>
+                                    <%=cateList[i].add_time%>
+                                </td>
+                                <td>
+                                    <%if(cateList[i].status===1){%>
+                                        <img src="/admin/images/yes.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'goodsCateService', 
+                                            id: '<%=cateList[i]._id%>',
+                                            key: 'status',
+                                            value: 2,
+                                        })">
+                                        <%}else{%>
+                                            <img src="/admin/images/no.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'goodsCateService', 
+                                            id: '<%=cateList[i]._id%>',
+                                            key: 'status',
+                                            value: 1,
+                                        })">
+                                            <%}%>
+                                </td>
+                                <td>
+                                    <a target="rightView" href="/<%=config.adminPath%>/goodsCate/edit?id=<%=cateList[i]._id%>">修改</a>
+                                    <a href="/<%=config.adminPath%>/goodsCate/delete?id=<%=cateList[i]._id%>">删除</a>
+                                </td>
+                            </tr>
+
+
+
+                            <%for(let j=0; j<cateList[i].items.length; j++){%>
+                                <tr>
+                                    <td>
+                                        <span style="margin-left: 10px;">---</span>
+                                        <%=cateList[i].items[j].title%>
+                                    </td>
+                                    <td>
+                                        <img src="<%=cateList[i].items[j].cate_img%>" alt="" width="200">
+                                    </td>
+                                    <td>
+                                        <%=cateList[i].items[j].description%>
+                                    </td>
+                                    <td>
+                                        <%=cateList[i].items[j].add_time%>
+                                    </td>
+                                    <td>
+                                    <%if(cateList[i].items[j].status===1){%>
+                                        <img src="/admin/images/yes.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'goodsCateService', 
+                                            id: '<%=cateList[i].items[j]._id%>',
+                                            key: 'status',
+                                            value: 2,
+                                        })">
+                                        <%}else{%>
+                                            <img src="/admin/images/no.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'goodsCateService', 
+                                            id: '<%=cateList[i].items[j]._id%>',
+                                            key: 'status',
+                                            value: 1,
+                                        })">
+                                            <%}%>
+                                </td>
+                                    <td>
+                                        <a target="rightView" href="/<%=config.adminPath%>/goodsCate/edit?id=<%=cateList[i].items[j]._id%>">修改</a>
+                                        <a href="/<%=config.adminPath%>/goodsCate/delete?id=<%=cateList[i].items[j]._id%>">删除</a>
+                                    </td>
+                                </tr>
+                            <%}%>
+
+
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    </html>

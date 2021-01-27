@@ -37,6 +37,9 @@ import { GoodsTypeService } from 'src/public/service/goods-type/goods-type.servi
 import { GoodsTypeAttributeController } from './controller/goods-type-attribute/goods-type-attribute.controller';
 import { GoodsTypeAttributeSchema } from 'src/public/schema/goodsTypeAttribute';
 import { GoodsTypeAttributeService } from 'src/public/service/goods-type-attribute/goods-type-attribute.service';
+import { GoodsCateSchema } from 'src/public/schema/goods_cate.schema';
+import { GoodsCateService } from 'src/public/service/goods-cate/goods-cate.service';
+import { GoodsCateController } from './controller/goods-cate/goods-cate.controller';
 
 @Module({
   imports: [
@@ -82,6 +85,11 @@ import { GoodsTypeAttributeService } from 'src/public/service/goods-type-attribu
         schema: GoodsTypeAttributeSchema,
         collection: 'goods_type_attribute',
       },
+      {
+        name: 'GoodsCate',
+        schema: GoodsCateSchema,
+        collection: 'goods_cate',
+      },
     ]),
   ],
   controllers: [
@@ -94,6 +102,7 @@ import { GoodsTypeAttributeService } from 'src/public/service/goods-type-attribu
     GoodsController,
     GoodsTypeController,
     GoodsTypeAttributeController,
+    GoodsCateController,
   ],
   providers: [
     ToolsService,
@@ -103,7 +112,8 @@ import { GoodsTypeAttributeService } from 'src/public/service/goods-type-attribu
     RoleAccessService,
     FocusService,
     GoodsTypeService,
-    GoodsTypeAttributeService
+    GoodsTypeAttributeService,
+    GoodsCateService,
   ],
   exports: [
     RoleAccessService, AccessService, AdminService,
