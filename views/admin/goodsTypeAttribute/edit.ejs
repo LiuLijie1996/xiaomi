@@ -35,7 +35,7 @@
 
                                 <li>
                                     可选值列表：
-                                    <textarea name="attr_value" id="attr_value" cols="30" rows="10" disabled><%=goodsTypeAttrItem.arrt_value%></textarea>
+                                    <textarea name="attr_value" id="attr_value" cols="30" rows="10" <%if(goodsTypeAttrItem.attr_type.toString()!=3){%> disabled <%}%>><%=goodsTypeAttrItem.attr_value%></textarea>
                                 </li>
 
                                 <li>

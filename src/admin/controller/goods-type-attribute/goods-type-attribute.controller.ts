@@ -72,6 +72,8 @@ export class GoodsTypeAttributeController {
 
     @Post('doEdit')
     async doEdit(@Query() query, @Body() body) {
+        body.attr_value = body.attr_type != 3 ? '' : body.attr_value;
+
         let result = await this.goodsTypeAttributeService.update({
             _id: query.id
         }, body);

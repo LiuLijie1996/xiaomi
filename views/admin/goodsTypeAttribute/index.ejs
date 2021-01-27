@@ -33,7 +33,13 @@
                                     <%=goodsTypeItem.title%>
                                 </td>
                                 <td>
-                                    <%=goodsTypeAttribute[i].attr_type%>
+                                    <%if(goodsTypeAttribute[i].attr_type == 1){%>
+                                        单行文本框
+                                    <%}else if(goodsTypeAttribute[i].attr_type == 2){%>
+                                        多行文本框
+                                    <%}else{%>
+                                        下拉选项框
+                                    <%}%>
                                 </td>
                                 <td>
                                     <%=goodsTypeAttribute[i].attr_value%>
@@ -42,7 +48,23 @@
                                     <%=helper.moment(goodsTypeAttribute[i].add_time)%>
                                 </td>
                                 <td>
-                                    <%=goodsTypeAttribute[i].status%>
+                                    <%if(goodsTypeAttribute[i].status===1){%>
+                                        <img src="/admin/images/yes.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'goodsTypeAttr', 
+                                            id: '<%=goodsTypeAttribute[i]._id%>',
+                                            key: 'status',
+                                            value: 2,
+                                        })">
+                                        <%}else{%>
+                                            <img src="/admin/images/no.gif" onclick="page.updateKey({
+                                            ele: this, 
+                                            model: 'goodsTypeAttr', 
+                                            id: '<%=goodsTypeAttribute[i]._id%>',
+                                            key: 'status',
+                                            value: 1,
+                                        })">
+                                            <%}%>
                                 </td>
                                 <td class="text-center">
                                     <a target="rightView" href="/<%=config.adminPath%>/goodsTypeAttribute/edit?id=<%=goodsTypeAttribute[i]._id%>">修改</a>
