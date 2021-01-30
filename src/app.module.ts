@@ -26,8 +26,8 @@ export class AppModule {
     // 配置中间件
     consumer
       .apply(InitMiddleware)
-      .forRoutes(`*`)
+      .forRoutes(`/${Config.adminPath}`)
       .apply(AdminMiddleware)// 注册中间件
-      .forRoutes(`/${Config.adminPath}`)// 访问所有路由使用中间件
+      .forRoutes(`/${Config.adminPath}`)// 访问路由使用中间件
   }
  }

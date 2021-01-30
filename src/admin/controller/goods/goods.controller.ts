@@ -1,16 +1,31 @@
-import { Body, Controller, Get, Post, Render } from '@nestjs/common';
+import { All, Body, Controller, Get, Post, Render, Request, Response } from '@nestjs/common';
+import { GoodsService } from 'src/public/service/goods/goods.service';
+import { ToolsService } from 'src/public/service/tools/tools.service';
 import { Config } from "../../../public/config/Config";
 
 @Controller(Config.adminPath + '/goods')
 export class GoodsController {
+    constructor(
+        private toolsService: ToolsService,
+        private goodsService: GoodsService,
+    ) { }
+
+
     @Get()
-    @Render('admin/goods/add')
+    @Render('admin/goods/index')
     add() {
         return {};
     }
 
-    @Post('doAdd')
-    doAdd(@Body() body) {
-        console.log(body);
+    @Get('add')
+    @Render('admin/goods/add')
+    doAdd() {
+        return {};
+    }
+
+    @All('myUeditor')
+    @Render('admin/goods/ueditor')
+    ueditor(@Request() req) {
+        return {};
     }
 }

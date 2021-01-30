@@ -30,7 +30,7 @@ export class GoodsCateController {
                 },
             }
         ]);
-        
+
         return {
             cateList: result,
         };
@@ -49,6 +49,15 @@ export class GoodsCateController {
     @UseInterceptors(FileInterceptor('img_file'))
     async doAdd(@Body() body, @UploadedFile() file) {
         let saveFile = this.toolsService.saveFile(file);
+
+        if (saveFile.code) {
+            this.toolsService.jimpImg({
+                filePath: saveFile.savePath,
+                width: 100,
+                height: 100,
+            });
+        }
+
         // 保存数据
         let result = await this.goodsCateService.create({
             ...body,
@@ -77,21 +86,27 @@ export class GoodsCateController {
         let saveFile = this.toolsService.saveFile(file);
 
         let result = null;
-        if(file){
+        if (file) {
+            this.toolsService.jimpImg({
+                filePath: saveFile.savePath,
+                width: 100,
+                height: 100,
+            });
+
             // 保存数据
-            result = await this.goodsCateService.update({_id: query.id}, {
+            result = await this.goodsCateService.update({ _id: query.id }, {
                 ...body,
                 pid: body.pid == '0' ? '0' : this.toolsService.objectId(body.pid),
                 cate_img: saveFile.fileUrl,
             });
-        }else{
+        } else {
             // 保存数据
-            result = await this.goodsCateService.update({_id: query.id}, {
+            result = await this.goodsCateService.update({ _id: query.id }, {
                 ...body,
                 pid: body.pid == '0' ? '0' : this.toolsService.objectId(body.pid),
             });
         }
-        
+
 
         return { result };
     }

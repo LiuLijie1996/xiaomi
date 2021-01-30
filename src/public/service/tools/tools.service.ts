@@ -5,6 +5,7 @@ import * as moment from "moment";
 import * as mongoose from "mongoose";
 import { resolve, extname } from 'path';
 import { createWriteStream, mkdirSync, existsSync } from 'fs';
+import * as Jimp from "jimp";
 
 /**
  * 工具集
@@ -84,6 +85,7 @@ export class ToolsService {
                 code: 200,
                 msg: "上传成功",
                 fileUrl: '/upload/' + dirName + '/' + fileName,
+                savePath: savePath + '/' + fileName,
             };
         } catch (error) {
             return {
@@ -96,7 +98,21 @@ export class ToolsService {
     /**
      * 转换id
     */
-   objectId(id){
-       return mongoose.Types.ObjectId(id);
-   }
+    objectId(id) {
+        return mongoose.Types.ObjectId(id);
+    }
+
+
+    /**
+     * 缩略图
+     */
+    jimpImg(json: { filePath: string, width?: number, height?: number }) {
+        // 缩略图
+        Jimp.read(json.filePath, function (err, lenna) {
+            if (err) throw err;
+            lenna.resize(json.width || 200, json.height || 200)            // resize
+                .quality(60)                 // set JPEG quality
+                .write(json.filePath + `_${json.width || 200}x${json.height || 200}` + extname(json.filePath)); // save
+        });
+    }
 }
