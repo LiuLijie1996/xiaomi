@@ -42,6 +42,12 @@ import { GoodsCateService } from 'src/public/service/goods-cate/goods-cate.servi
 import { GoodsCateController } from './controller/goods-cate/goods-cate.controller';
 import { GoodsSchema } from 'src/public/schema/goods.schema';
 import { GoodsService } from 'src/public/service/goods/goods.service';
+import { GoodsColorSchema } from 'src/public/schema/goods_color.schema';
+import { GoodsColorService } from 'src/public/service/goods-color/goods-color.service';
+import { GoodsImagesService } from 'src/public/service/goods-images/goods-images.service';
+import { GoodsImagesSchema } from 'src/public/schema/goods_images.schema';
+import { GoodsAttrSchema } from 'src/public/schema/goods_attr.schema';
+import { GoodsAttrService } from 'src/public/service/goods-attr/goods-attr.service';
 
 @Module({
   imports: [
@@ -97,6 +103,21 @@ import { GoodsService } from 'src/public/service/goods/goods.service';
         schema: GoodsSchema,
         collection: 'goods',
       },
+      {
+        name: 'GoodsColor',
+        schema: GoodsColorSchema,
+        collection: 'goods_color',
+      },
+      {
+        name: 'GoodsImages',
+        schema: GoodsImagesSchema,
+        collection: 'goods_images',
+      },
+      {
+        name: 'GoodsAttr',
+        schema: GoodsAttrSchema,
+        collection: 'goods_attr',
+      },
     ]),
   ],
   controllers: [
@@ -122,6 +143,9 @@ import { GoodsService } from 'src/public/service/goods/goods.service';
     GoodsTypeAttributeService,
     GoodsCateService,
     GoodsService,
+    GoodsColorService,
+    GoodsImagesService,
+    GoodsAttrService,
   ],
   exports: [
     RoleAccessService, AccessService, AdminService,

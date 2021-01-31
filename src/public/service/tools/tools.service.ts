@@ -109,7 +109,10 @@ export class ToolsService {
     jimpImg(json: { filePath: string, width?: number, height?: number }) {
         // 缩略图
         Jimp.read(json.filePath, function (err, lenna) {
-            if (err) throw err;
+            if (err) {
+                console.log('---', JSON.stringify(err));
+                return;
+            }
             lenna.resize(json.width || 200, json.height || 200)            // resize
                 .quality(60)                 // set JPEG quality
                 .write(json.filePath + `_${json.width || 200}x${json.height || 200}` + extname(json.filePath)); // save
