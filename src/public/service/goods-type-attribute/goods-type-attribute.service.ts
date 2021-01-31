@@ -23,7 +23,7 @@ export class GoodsTypeAttributeService {
     /**
      * 查找
      */
-    async find(json: GoodsTypeAttribute = {}) {
+    async find(json: GoodsTypeAttribute = {}): Promise<GoodsTypeAttribute> {
         return this.goodsTypeAttributeModel.find(json);
     }
 
