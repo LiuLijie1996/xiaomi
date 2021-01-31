@@ -22,10 +22,4 @@ export class GoodsController {
     doAdd() {
         return {};
     }
-
-    @All('myUeditor')
-    @Render('admin/goods/ueditor')
-    ueditor(@Request() req) {
-        return {};
-    }
 }
